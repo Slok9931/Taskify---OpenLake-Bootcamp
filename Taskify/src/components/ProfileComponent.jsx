@@ -32,12 +32,10 @@ function ProfileComponent() {
     authMethod?.addEventListener('change', function () {
       let inputHTML = '';
       if (this.value === 'email') {
-        inputHTML = `<label>Enter Email: <input type="email" /></label>`;
+        inputHTML = `<label class="block mb-2 font-semibold">Enter Email: <input type="email" class="w-full mt-1 p-2 border rounded"/></label>`;
       } else if (this.value === 'phone') {
-        inputHTML = `<label>Enter Phone Number: <input type="tel" /></label>`;
-      } else if (this.value === 'passcode') {
-        inputHTML = `<label>Enter Passcode: <input type="text" /></label>`;
-      }
+        inputHTML = `<label class="block mb-2 font-semibold">Enter Phone Number: <input type="tel" class="w-full mt-1 p-2 border rounded"/></label>`;
+      } 
       authInputContainer.innerHTML = inputHTML;
     });
 
@@ -58,101 +56,197 @@ function ProfileComponent() {
   }, []);
   
     return (
-    <div class="container">
-        <h1>User</h1>
+    <div className="max-w-5xl mx-auto bg-white p-8 rounded-lg shadow-md overflow-y-auto max-h-[90vh]">
+        <h1 className="text-center text-3xl font-bold text-[#2c3e50] mb-8">USER</h1>
 
-        <section id="profile"> 
-            <h2>Profile</h2>
-            <label>Name: <input type="text" defaultValue="User" /></label>
-            <label>Email: <input type="email" defaultValue="useremail@gmail.com" /></label>
-            <label>Date of Birth: <input type="date" /></label>
-            <label>Avatar: <input type="file" accept="image/*" /></label>
-            <label>Bio: <br /> <textarea rows="3" placeholder="Short bio about yourself or your work"></textarea> </label>
-        </section>
-        <section id="security">
-            <h2>Security</h2>
-            <button id="change-password-btn">Change Password</button>
-            <div id="change-password-form" style={{ display: 'none' }}>
-                <label>Current Password: <input type="password" /></label>
-                <label>New Password: <input type="password" /></label>
-                <label>Confirm New Password: <input type="password" /></label>
-                <button>Save Changes</button>
-                <button id="cancel-password-btn" type="button">Cancel</button>
-            </div>
-
-            <label>Two-Factor Authentication: <input type="checkbox" id="2fa-toggle" /></label>
-            <div id="2fa-setup" style={{ display: 'none' }}>
-                <label>Authentication Method:
-                    <select id="auth-method">
-                        <option value="">-- Select --</option>
-                        <option value="email">Email</option>
-                        <option value="phone">Phone Number</option>
-                    </select>
-                </label>
-                <div id="auth-input-container"></div>
-            </div>
-
-            <h3>Active Sessions</h3>
-            <ul>
-                <li>Device 1 - Location - Last Active: 2025-06-09 09:30 AM <button>Log out</button></li>
-                <li>Device 2 - Location - Last Active: 2025-06-08 08:00 PM <button>Log out</button></li>
-            </ul>
-            <button>Log out from other devices</button>
-        </section>
-
-        <section id="preferences">
-            <h2>Preferences</h2>
-            <label>Theme:
-                <select>
-                    <option>Light</option>
-                    <option>Dark</option>
-                    <option>System</option>
-                </select>
+        <section id="profile" className="mb-10"> 
+            <h2 className="text-xl font-semibold border-b-2 border-blue-600 pb-2 mb-6 text-blue-700">Profile</h2>
+            
+            <label className="block mb-4 font-semibold">
+              Name: 
+              <input 
+              type="text" 
+              defaultValue="User" 
+              className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans"
+              />
             </label>
-            <label>Language:
-                <select>
-                    <option>English</option>
-                    <option>Spanish</option>
-                    <option>French</option>
-                </select>
+            
+            <label className="block mb-4 font-semibold">
+              Email: 
+              <input 
+              type="email" 
+              defaultValue="useremail@gmail.com" 
+              className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans"
+              />
             </label>
-            <label>Default Note Format:
-                <select>
-                    <option>Plain Text</option>
-                    <option>Markdown</option>
-                </select>
+
+            <label className="block mb-4 font-semibold">
+              Date of Birth:
+              <input
+                type="date"
+                className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans"
+              />
             </label>
-            <label>Task Default Priority:
-                <select>
-                    <option>Low</option>
-                    <option>Medium</option>
-                    <option>High</option>
-                </select>
+
+            <label className="block mb-4 font-semibold">
+              Avatar:
+              <input
+                type="file"
+                accept="image/*"
+                className="w-full mt-1 border border-gray-300 rounded px-3 py-2 bg-gray-100 cursor-pointer hover:bg-gray-200"
+                
+              />
             </label>
-            <label>Auto-save Notes: <input type="checkbox" checked /></label>
+
+            <label className="block mb-4 font-semibold">
+              Bio:
+              <textarea
+                rows="3"
+                placeholder="Short bio about yourself or your work"
+                className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans resize-none"
+              />
+            </label> 
+
         </section>
 
-        <section id="notification-settings">
-            <h2>Notification Settings</h2>
-            <label>Email Notifications: <input type="checkbox" checked /></label>
-            <label>Push Notifications: <input type="checkbox" checked /></label>
-            <label>Task Reminders: <input type="checkbox" checked /></label>
-            <label>Note Updates: <input type="checkbox" checked /></label>
-        </section>
+        <section id="security" className="mb-10">
+            <h2 className="text-xl font-semibold border-b-2 border-blue-600 pb-2 mb-6 text-blue-700">Security</h2>
+            <button
+          id="change-password-btn"
+          className="mb-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded"
+        >
+          Change Password
+        </button>
 
-        <section id="activity">
-            <h2>Activity</h2>
-            <ul>
-                <li>Task created: "Task Name" - 2025-06-09</li>
-                <li>Note edited: "Note Title" - 2025-06-08</li>
-                <li>Password changed - 2025-06-07</li>
-            </ul>
-        </section>
+        <div id="change-password-form" style={{ display: 'none' }} className="mb-4 space-y-4">
+          <label className="block font-semibold">
+            Current Password:
+            <input type="password" className="w-full mt-1 p-2 border border-gray-300 rounded" />
+          </label>
 
-        <section id="signout">
-            <h2>Sign Out</h2>
-            <button id="signout-btn">Sign Out</button>
-        </section>
+          <label className="block font-semibold">
+            New Password:
+            <input type="password" className="w-full mt-1 p-2 border border-gray-300 rounded" />
+          </label>
+
+          <label className="block font-semibold">
+            Confirm New Password:
+            <input type="password" className="w-full mt-1 p-2 border border-gray-300 rounded" />
+          </label>
+
+          <div className="flex space-x-4">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">
+              Save Changes
+            </button>
+            <button
+              id="cancel-password-btn"
+              type="button"
+              className="bg-gray-400 hover:bg-gray-500 text-white font-semibold px-4 py-2 rounded"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+
+        <label className="block mb-4 font-semibold">
+          Two-Factor Authentication:
+          <input
+            type="checkbox"
+            id="2fa-toggle"
+            className="ml-2 transform scale-125 align-middle"
+          />
+        </label>
+
+        <div id="2fa-setup" style={{ display: 'none' }} className="mb-6">
+          <label className="block font-semibold mb-2">
+            Authentication Method:
+            <select
+              id="auth-method"
+              className="w-full mt-1 p-2 border border-gray-300 rounded"
+            >
+              <option value="">-- Select --</option>
+              <option value="email">Email</option>
+              <option value="phone">Phone Number</option>
+            </select>
+          </label>
+          <div id="auth-input-container"></div>
+        </div>
+
+        <h3 className="text-lg font-semibold text-[#2c3e50] mb-3">Active Sessions</h3>
+        <ul className="list-none max-h-[150px] overflow-y-auto border border-gray-300 rounded bg-gray-50">
+          <li className="flex justify-between items-center border-b border-gray-300 px-4 py-2 text-sm">
+            Device 1 - Location - Last Active: 2025-06-09 09:30 AM
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-3 py-1 rounded ml-4">
+              Log out
+            </button>
+          </li>
+          <li className="flex justify-between items-center border-b border-gray-300 px-4 py-2 text-sm">
+            Device 2 - Location - Last Active: 2025-06-08 08:00 PM
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-3 py-1 rounded ml-4">
+              Log out
+            </button>
+          </li>
+        </ul>
+
+        <button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">
+          Log out from other devices
+        </button>
+      </section>
+
+      <section id="preferences" className="mb-10">
+        <h2 className="text-xl font-semibold border-b-2 border-blue-600 pb-2 mb-6 text-blue-700">Preferences</h2>
+
+        {[
+          ['Theme:', ['Light', 'Dark', 'System']],
+          ['Language:', ['English', 'Hindi', 'French' , 'Spanish', 'Telugu']],
+          ['Default Note Format:', ['Plain Text', 'Markdown']],
+          ['Task Default Priority:', ['Low', 'Medium', 'High']],
+        ].map(([label, options]) => (
+          <label key={label} className="block mb-4 font-semibold">
+            {label}
+            <select className="w-full mt-1 p-2 border border-gray-300 rounded">
+              {options.map(option => (
+                <option key={option}>{option}</option>
+              ))}
+            </select>
+          </label>
+        ))}
+
+        <label className="block mb-4 font-semibold">
+          Auto-save Notes:
+          <input type="checkbox" defaultChecked className="ml-2 transform scale-125 align-middle" />
+        </label>
+      </section>
+
+      <section id="notification-settings" className="mb-10">
+        <h2 className="text-xl font-semibold border-b-2 border-blue-600 pb-2 mb-6 text-blue-700">Notification Settings</h2>
+
+        {['Email Notifications', 'Push Notifications', 'Task Reminders', 'Note Updates'].map((label) => (
+          <label key={label} className="block mb-3 font-semibold">
+            {label}:
+            <input type="checkbox" defaultChecked className="ml-2 transform scale-125 align-middle" />
+          </label>
+        ))}
+      </section>
+
+      <section id="activity" className="mb-10">
+        <h2 className="text-xl font-semibold border-b-2 border-blue-600 pb-2 mb-6 text-blue-700">Activity</h2>
+        <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+          <li>Task created: "Task Name" - 2025-06-09</li>
+          <li>Note edited: "Note Title" - 2025-06-08</li>
+          <li>Password changed - 2025-06-07</li>
+        </ul>
+      </section>
+
+      <section id="signout">
+        <h2 className="text-xl font-semibold border-b-2 border-blue-600 pb-2 mb-6 text-blue-700">Sign Out</h2>
+        <button
+          id="signout-btn"
+          className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded"
+        >
+          Sign Out
+        </button>
+      </section>
     </div>
   );
 }
