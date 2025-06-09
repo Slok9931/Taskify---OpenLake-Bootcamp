@@ -1,1 +1,84 @@
 @import "tailwindcss";
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #ccd5ae;
+    margin: 0;
+    padding: 20px;
+}
+
+.task-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fefae0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: larger;
+    font-weight: 600;
+}
+h2{
+   font-size: larger;
+    /* background-color: red; */
+    /* padding: 0px 0px 0px 240px; */
+    font-weight: 500;
+    text-align: center;
+    
+}
+/* Styles for the form you just created */
+.Noteform {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.Noteform input,
+.Noteform textarea {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.Noteform button {
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #d4a373;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+
+
+/* Styles for the task list display */
+.task-list h2 {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.task-item {
+    background-color: #ffe7cf;
+   
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    border-left: 4px solid #d4a373;
+}
+
+.task-item h3 {
+    margin: 0 0 0.5rem 0;
+}
+
+.task-item p {
+    margin: 0;
+    color: #555;
+}
