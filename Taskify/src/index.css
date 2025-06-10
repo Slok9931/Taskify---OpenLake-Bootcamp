@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@keyframes neonShift {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+  }
+  
+  .animated-gradient {
+    background: linear-gradient(60deg, #4f46e5, #9333ea, #14b8a6, #6366f1);
+    background-size: 500% 500%;
+    animation: neonShift 18s linear infinite;
+  }
+  
+  
