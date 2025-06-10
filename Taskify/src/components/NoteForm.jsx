@@ -1,45 +1,73 @@
 import React, { useState } from 'react';
 
-function Note({ AddTask }) {
-    const [title, Title] = useState('');
-    const [description, Description] = useState('');
+const NoteForm = () => {
+ 
+  const [title, Title] = useState('');
+  const [description, Description] = useState('');
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (!title.trim()) {
-            alert('Please enter a title for the task.');
-            return;
-        }
-        AddTask({
-            title: title,
-            description: description,
+  const OnSubmit = (event) => {
+    event.preventDefault(); 
 
-            id: Date.now()
-        });
-        Title('');
-        Description('');
-    };
+    if (!title.trim() && !description.trim()) {
+      alert('Please enter a title or description.');
+      return;
+    }
+    
+    
+    console.log({
+      title,
+      description,
+    });
+    
+   
+    Title('');
+    Description('');
+  };
 
-    return (
+  return (
+   
+    <div className="bg-yellow-200 rounded-lg shadow-xl p-8 w-full max-w-2xl">
+      <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Add a Task</h1>
+      
+      <form onSubmit={OnSubmit} className="flex flex-col gap-3">
+        
+        <div>
+          <label htmlFor="title" className="sr-only">Title</label>
+          <input
+            id="title"
+            type="text"
+            value={title}
+            onChange={(e) => Title(e.target.value)}
+            placeholder="Title"
+            className="w-full p-3 bg-orange-50 text-gray-800 rounded-md border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+          />
+        </div>
 
-        <form onSubmit={handleSubmit} className="Noteform">
-            <h1>Create a New Task</h1>
-            <input
-                type="text"
-                placeholder="Enter task title"
-                value={title}
-                onChange={(e) => Title(e.target.value)}
-                required
-            />
-            <textarea
-                placeholder="Enter task description"
-                value={description}
-                onChange={(e) => Description(e.target.value)}
-                rows="4"
-            />
-            <button type="submit">Add Task</button>
-        </form>
-    );
-}
+       
+        <div>
+          <label htmlFor="description" className="sr-only">Description</label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => Description(e.target.value)}
+            placeholder="Task"
+            rows="8"
+            className="w-full p-3 bg-orange-50 text-gray-800 rounded-md border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition resize-none"
+          />
+        </div>
 
-export default Note;
+       
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            className="px-6 py-2 bg-orange-400 text-white font-semibold rounded-md hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+          >
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default NoteForm;
