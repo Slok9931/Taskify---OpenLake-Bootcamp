@@ -5,6 +5,7 @@ import Todo from "./Todo"
 import Signup from "./Signup";
 import Note from "./Note";
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/note" element={<Note />} />
         <Route path="/profile" element={<Profile />} />
+        
       </Routes>
     </BrowserRouter>
   );
