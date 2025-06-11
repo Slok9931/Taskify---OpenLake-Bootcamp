@@ -1,71 +1,76 @@
 import React, { useState } from 'react';
+import { Fade } from "react-awesome-reveal";
 
-const NoteForm = () => {
- 
-  const [title, Title] = useState('');
-  const [description, Description] = useState('');
+const NoteForm = ({ onAddNote }) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
-  const OnSubmit = (event) => {
-    event.preventDefault(); 
-
+  const handleSubmit = (event) => {
+    event.preventDefault();
     if (!title.trim() && !description.trim()) {
-      alert('Please enter a title or description.');
+      alert("Please enter a title or description.");
       return;
     }
-    
-    
-    console.log({
-      title,
-      description,
-    });
-    
-   
-    Title('');
-    Description('');
+    onAddNote({ title, description, id: Date.now() });
+    setTitle('');
+    setDescription('');
   };
 
   return (
-   
-    <div className="bg-yellow-200 rounded-lg shadow-xl p-8 w-full max-w-2xl">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Add a Task</h1>
-      
-      <form onSubmit={OnSubmit} className="flex flex-col gap-3">
-        
-        <div>
-          <label htmlFor="title" className="sr-only">Title</label>
-          <input
-            id="title"
-            type="text"
-            value={title}
-            onChange={(e) => Title(e.target.value)}
-            placeholder="Title"
-            className="w-full p-3 bg-orange-50 text-gray-800 rounded-md border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-          />
-        </div>
 
-       
-        <div>
-          <label htmlFor="description" className="sr-only">Description</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => Description(e.target.value)}
-            placeholder="Task"
-            rows="8"
-            className="w-full p-3 bg-orange-50 text-gray-800 rounded-md border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition resize-none"
-          />
-        </div>
+    <div className="min-h-screen flex items-center justify-center animated-gradient px-4">
+      <Fade triggerOnce direction="up" duration={500}>
 
-       
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            className="px-6 py-2 bg-orange-400 text-white font-semibold rounded-md hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
-          >
-            Add
-          </button>
+        <div className="relative group bg-white p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-2xl transition-all duration-500 ease-in-out hover:scale-[1.02]">
+
+
+          <div className="absolute inset-1 rounded-2xl border-2 opacity-0 group-hover:opacity-200 transition-all duration-500 border-indigo-500 group-hover:shadow-[0_0_30px_5px_rgba(99,102,241,0.7)] z-[-1]" />
+
+          <form onSubmit={handleSubmit} className="flex flex-col">
+
+            <input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="
+                text-3xl font-bold text-gray-800
+                bg-transparent border-none focus:outline-none focus:ring-0
+                w-full mb-3 placeholder-gray-400
+              "
+            />
+
+
+            <textarea
+              placeholder="Take a note..."
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows="8"
+              className="
+                text-base text-gray-700
+                bg-transparent border-none focus:outline-none focus:ring-0
+                w-full resize-y placeholder-gray-400
+              "
+            />
+
+
+            <div className="flex justify-end mt-6">
+              <button
+                type="submit"
+                className="
+                  px-6 py-2 bg-indigo-600 text-white font-semibold
+                  rounded-xl shadow-sm
+                  hover:bg-indigo-700 focus:outline-none focus:ring-2
+                  focus:ring-indigo-500 focus:ring-opacity-50
+                  transition-colors duration-300
+                "
+              >
+                Add Note
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </Fade>
     </div>
   );
 };
