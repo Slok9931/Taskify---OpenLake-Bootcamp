@@ -1,14 +1,21 @@
 import React from "react";
-import Sidebar from "./components/sidebar.jsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./Login"
+import Todo from "./Todo"
+import Signup from "./Signup";
+import Note from "./Note";
 
 function App() {
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="flex-1 bg-zinc-100 p-6">
-        <h1 className="text-2xl font-bold">Taskify Dashboard</h1>
-      </main>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Todo />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/note" element={<Note />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

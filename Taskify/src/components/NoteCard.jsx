@@ -1,5 +1,5 @@
 // src/components/NoteCard.jsx
-
+import React from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 
 const NoteCard = ({ title, description, onEdit, onDelete }) => {
