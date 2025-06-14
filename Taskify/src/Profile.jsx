@@ -16,7 +16,7 @@ function Profile() {
   }, []);
 
   if (!userData) {
-    return <div>Loading...</div>;
+    return <div>Login First to View Profile</div>;
   }
 
   return <ProfileComponent userData={userData} />;
