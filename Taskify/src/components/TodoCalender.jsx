@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const TodoCalendar = () => {
+const TodoCalender = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [task, setTask] = useState("");
   const [todos, setTodos] = useState({});
@@ -72,4 +72,4 @@ const TodoCalendar = () => {
   );
 };
 
-export default TodoCalendar;
+export default TodoCalender;
