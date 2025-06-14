@@ -1,10 +1,10 @@
 import React from 'react'
-import TodoCalender from "./components/TodoCalender";
+import TodoCalendar from "./components/TodoCalender"; // Correct spelling
 
 const Todo = () => {
   return (
-    <div>
-      <TodoCalender />
+    <div class="flex items-center justify-center min-h-screen bg-gray-100">
+      <TodoCalendar /> {/* Use the correct component name */}
     </div>
   );
 };
