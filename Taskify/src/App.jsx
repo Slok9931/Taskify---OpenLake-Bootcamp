@@ -4,6 +4,7 @@ import Login from "./Login"
 import Todo from "./Todo"
 import Signup from "./Signup";
 import Note from "./Note";
+import Profile from './Profile';
 
 function App() {
   return (
