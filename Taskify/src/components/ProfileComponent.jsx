@@ -1,6 +1,39 @@
+import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
 
-function ProfileComponent() {
+function ProfileComponent({ userData }) {
+  const [name, setName] = useState(userData.name || "");
+  const [email, setEmail] = useState(userData.email || "");
+  const [dob, setDob] = useState(userData.dob || "");
+  const [gender, setGender] = useState(userData.gender || "");
+  const [phone, setPhone] = useState(userData.phone || "");
+  const [bio, setBio] = useState(userData.bio || "");
+
+  const handleSaveChanges = () => {
+    const updatedData = {
+      name,
+      email,
+      dob,
+      gender,
+      phone,
+      bio,
+      password: userData.password
+    };
+
+    const storedUsers = localStorage.getItem("users");
+    if (storedUsers) {
+      const usersArray = JSON.parse(storedUsers);
+      usersArray[usersArray.length - 1] = updatedData;
+      localStorage.setItem("users", JSON.stringify(usersArray));
+    }
+
+    alert("Profile updated successfully.");
+  };
+
+  const handleSignOut = () => {
+    window.location.href = "/login";  
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center animated-gradient p-8">
       <Fade triggerOnce cascade direction="up" duration={500}>
@@ -14,33 +47,27 @@ function ProfileComponent() {
 
             <label className="block mb-4 font-semibold">
               Name:
-              <input
-                type="text"
-                defaultValue="User"
-                className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans"
-              />
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)}
+                className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans" />
             </label>
 
             <label className="block mb-4 font-semibold">
               Email:
-              <input
-                type="email"
-                defaultValue="useremail@gmail.com"
-                className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans"
-              />
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans" />
             </label>
 
             <label className="block mb-4 font-semibold">
               Date of Birth:
-              <input
-                type="date"
-                className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans"
-              />
+              <input type="date" value={dob} onChange={(e) => setDob(e.target.value)}
+                className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans" />
             </label>
 
             <label className="block mb-4 font-semibold">
               Gender:
-              <select className="w-full mt-1 p-2 border border-gray-300 rounded">
+              <select value={gender} onChange={(e) => setGender(e.target.value)}
+                className="w-full mt-1 p-2 border border-gray-300 rounded">
+                <option value="">Select</option>
                 <option>Male</option>
                 <option>Female</option>
                 <option>Other</option>
@@ -50,46 +77,35 @@ function ProfileComponent() {
 
             <label className="block mb-4 font-semibold">
               Phone Number:
-              <input
-                type="tel"
+              <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)}
                 placeholder="+91-1234567890"
-                className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans"
-              />
+                className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans" />
             </label>
 
             <label className="block mb-4 font-semibold">
               Avatar:
-              <input
-                type="file"
-                accept="image/*"
-                className="w-full mt-1 border border-gray-300 rounded px-3 py-2 bg-gray-100 cursor-pointer hover:bg-gray-200"
-              />
+              <input type="file" accept="image/*"
+                className="w-full mt-1 border border-gray-300 rounded px-3 py-2 bg-gray-100 cursor-pointer hover:bg-gray-200" />
             </label>
 
             <label className="block mb-4 font-semibold">
               Bio:
-              <textarea
-                rows="3"
+              <textarea rows="3" value={bio} onChange={(e) => setBio(e.target.value)}
                 placeholder="Short bio about yourself or your work"
-                className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans resize-none"
-              />
+                className="w-full mt-1 p-2 border border-gray-300 rounded text-gray-800 text-sm font-sans resize-none" />
             </label>
           </section>
 
           <div className="flex justify-center">
-          <button
-            id="signout-btn"
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded mx-2"
-          >
-            Sign Out
-          </button>
-          <button
-            id="savechanges-btn"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded mx-2"
-          >
-            Save Changes
-          </button>
-        </div>
+            <button onClick={handleSignOut}
+              className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded mx-2">
+              Sign Out
+            </button>
+            <button onClick={handleSaveChanges}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded mx-2">
+              Save Changes
+            </button>
+          </div>
         </div>
       </Fade>
     </div>
