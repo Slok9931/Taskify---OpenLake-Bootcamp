@@ -18,7 +18,7 @@ const TodoCalendar = () => {
   };
 
   return (
-    <div className="w-full max-w-sm p-4 bg-white rounded-lg shadow-md text-sm">
+    <div className="w-full mx-auto max-w-sm p-4 bg-white rounded-lg shadow-md text-sm">
       <h1 className="text-lg font-semibold text-center mb-3">📅 Todo Calendar</h1>
 
       <div className="space-y-3">
