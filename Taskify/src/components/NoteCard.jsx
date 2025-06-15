@@ -2,30 +2,48 @@
 import React from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 
-const NoteCard = ({ title, description, onEdit, onDelete }) => {
-  return (
-    <div className="relative bg-white rounded-xl shadow-md p-4 w-120 h-100 flex flex-col">
-      <br /><br />
-      <div className="text-3xl font-extrabold mb-2 text-center">
-  <span className="text-4xl mr-2">✍️</span>{title}<span className="text-4xl mr-2">📝</span>
-</div>
-<br />
 
-      <div className="flex-1 overflow-y-auto pr-1 text-sm text-gray-700">
-        {description}
+const NoteCard = ({ title, description, isSelected, onSelect, onEdit, onDelete }) => {
+  
+  const handleEditClick = (e) => {
+    e.stopPropagation();
+    onEdit();
+  };
+
+  const handleDeleteClick = (e) => {
+    e.stopPropagation();
+    onDelete();
+  };
+
+  return (
+    
+    <div 
+      className={`
+        relative bg-white rounded-lg shadow-md p-4 flex flex-col h-40 
+        cursor-pointer transition-all duration-200 border-2
+        ${isSelected ? 'border-indigo-500 shadow-indigo-200' : 'border-transparent hover:shadow-xl'}
+      `}
+      onClick={onSelect}
+    >
+      
+      <h3 className="font-bold text-lg text-gray-800 truncate mb-2">{title}</h3>
+
+      <div className="flex-1 overflow-hidden">
+        <p className="text-sm text-gray-600 line-clamp-3">{description}</p>
       </div>
 
-      <div className="absolute top-2 right-2 flex space-x-2">
+      
+      <div className="absolute bottom-3 right-3 flex space-x-2">
         <button
-          className="text-blue-500 hover:text-blue-700 text-2xl"
-          onClick={onEdit}
+          className="text-gray-400 hover:text-blue-500 text-lg transition-colors"
+          onClick={handleEditClick}
           title="Edit"
         >
           <FaEdit />
         </button>
         <button
-          className="text-red-500 hover:text-red-700 text-2xl"
-          onClick={onDelete}
+          className="text-gray-400 hover:text-red-500 text-lg transition-colors"
+          onClick={handleDeleteClick}
           title="Delete"
         >
           <FaTrash />
