@@ -1,3 +1,4 @@
+
 // src/components/NoteCard.jsx
 import React from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
@@ -49,6 +50,7 @@ const NoteCard = ({ title, description, isSelected, onSelect, onEdit, onDelete }
           <FaTrash />
         </button>
       </div>
+
     </div>
   );
 };
