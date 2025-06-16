@@ -1,64 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { CheckCircle, Home, User, StickyNote, LogOut } from "lucide-react";
 
-export default function Navbar() {
+const Navbar = () => {
+  const [user, setUser] = useState({ name: "", email: "" });
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const toggleDropdown = () => {
-    setShowDropdown((prev) => !prev);
-  };
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("taskifyUser"));
+    if (storedUser) setUser(storedUser);
+  }, []);
+
+  const toggleDropdown = () => setShowDropdown(!showDropdown);
 
   return (
-    <div className="sticky top-0 z-50 flex justify-between items-center px-6 py-3 bg-gradient-to-r from-gray-800 to-teal-400 text-white shadow-md font-sans">
-      <div className="text-2xl font-bold tracking-wide">Taskify</div>
+    <nav className="w-full px-6 py-4 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-gradient shadow-md fixed top-0 left-0 z-50">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        
+        {/* Logo + tagline */}
+        <div>
+          <h1 className="flex items-center gap-2 text-2xl font-extrabold tracking-wider text-white drop-shadow-sm">
+            <CheckCircle className="w-6 h-6 text-white" />
+            Taskify
+          </h1>
+          <p className="text-xs text-white/80 ml-8 -mt-1">Plan. Prioritize. Progress.</p>
+        </div>
 
-      <div className="flex items-center space-x-5">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="px-4 py-2 rounded-full border border-gray-300 text-gray-800 w-44 focus:outline-none focus:ring-2 focus:ring-teal-400 transition"
-        />
-        <div className="relative">
-          <div
-            onClick={toggleDropdown}
-            className="cursor-pointer select-none"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="h-6 w-6 text-white"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-              />
-            </svg>
-          </div>
-          <div
-            className={`absolute right-0 top-10 bg-white rounded-lg p-3 shadow-lg transition-all duration-300 z-50 ${
-              showDropdown
-                ? "opacity-100 translate-y-0 pointer-events-auto"
-                : "opacity-0 -translate-y-2 pointer-events-none"
-            }`}
-          >
-            <a
-              href="/profile"
-              className="block text-gray-800 hover:text-teal-500 py-1"
-            >
-              Profile
-            </a>
-            <a
-              href="/logout"
-              className="block text-gray-800 hover:text-teal-500 py-1"
-            >
-              Logout
-            </a>
+        {/* Navigation links */}
+        <div className="flex items-center gap-6 relative">
+          <Link to="/todo" className="flex items-center gap-1 hover:opacity-90">
+            <Home size={20} /> <span className="hidden sm:inline">Todo</span>
+          </Link>
+          <Link to="/note" className="flex items-center gap-1 hover:opacity-90">
+            <StickyNote size={20} /> <span className="hidden sm:inline">Notes</span>
+          </Link>
+
+          {/* User Icon dropdown */}
+          <div className="relative">
+            <button onClick={toggleDropdown} className="flex items-center gap-1 hover:opacity-90">
+              <User size={20} /> <span className="hidden sm:inline">Profile</span>
+            </button>
+
+            {showDropdown && (
+              <div className="absolute right-0 mt-2 w-56 bg-white text-black rounded-lg shadow-lg z-50 p-4 text-sm">
+                <p className="font-semibold">{user.name || "Guest"}</p>
+                <p className="text-xs text-gray-500 mb-2">{user.email}</p>
+                <hr className="my-2" />
+                <Link to="/profile" className="block py-1 hover:text-indigo-600">Profile</Link>
+                <Link to="/login" className="block py-1 text-red-500 hover:text-red-700">Logout</Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
-}
+};
+
+export default Navbar;
