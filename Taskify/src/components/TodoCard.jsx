@@ -3,9 +3,24 @@ import { Pencil, Trash2, MoreVertical, Check, X } from 'lucide-react';
 import { Fade } from 'react-awesome-reveal';
 
 const dummyTodos = [
-  { id: 1, title: 'Learn Tailwind CSS ,React', description: 'go through docs and videos', completed: true },
-  { id: 2, title: 'create Todo App', description: 'complete frontend(using react,tailwind css)', completed: false },
-  { id: 3, title: 'Check features', description: 'Go through app and check whether all the required features present or not', completed: false },
+  {
+    id: 1,
+    title: 'Learn Tailwind CSS ,React',
+    description: 'go through docs and videos',
+    completed: true,
+  },
+  {
+    id: 2,
+    title: 'create Todo App',
+    description: 'complete frontend(using react,tailwind css)',
+    completed: false,
+  },
+  {
+    id: 3,
+    title: 'Check features',
+    description: 'Go through app and check whether all the required features present or not',
+    completed: false,
+  },
 ];
 
 export default function TodoCard() {
@@ -14,14 +29,12 @@ export default function TodoCard() {
   const [popoverId, setPopoverId] = useState(null);
   const popoverRef = useRef(null);
 
-
   useEffect(() => {
     setTodos(dummyTodos);
   }, []);
 
   useEffect(() => {
     if (popoverId === null) return;
-
     function handleClickOutside(event) {
       if (popoverRef.current && !popoverRef.current.contains(event.target)) {
         setPopoverId(null);
@@ -68,6 +81,7 @@ export default function TodoCard() {
     <div className="min-h-screen flex items-center justify-center animated-gradient px-4 py-8">
       <Fade triggerOnce cascade direction="up" duration={500}>
         <div className="relative group bg-white p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-lg transition-all duration-500 ease-in-out hover:scale-[1.02]">
+
           <div className="absolute inset-1 rounded-2xl border-2 opacity-0 group-hover:opacity-200 transition-all duration-500 border-indigo-500 group-hover:shadow-[0_0_30px_5px_rgba(99,102,241,0.7)] z-[-1]" />
           
           <h1 className="text-3xl font-bold text-center text-indigo-600 mb-8">
@@ -77,14 +91,14 @@ export default function TodoCard() {
           <div className="space-y-4">
             {todos.map((todo) => (
               <div key={todo.id} className="bg-gray-100 p-4 rounded-xl shadow-sm transition-all duration-300">
-                {editingTodo && editingTodo.id === todo.id ? (
-                  <div className="flex flex-col gap-2 ">
+
+                {editingTodo?.id === todo.id ? (
+                  <div className="flex flex-col gap-2">
                     <input
                       type="text"
                       value={editingTodo.title}
                       onChange={(e) => setEditingTodo({ ...editingTodo, title: e.target.value })}
                       className="w-full p-2 text-lg font-semibold rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                      
                     />
                     <textarea
                       value={editingTodo.description}
@@ -93,6 +107,7 @@ export default function TodoCard() {
                       rows="3"
                     />
                     <div className="flex justify-end gap-2 mt-2">
+
                       <button onClick={handleCancelEdit} className="p-2 text-gray-300 hover:text-gray-600" title="Cancel"><X size={20} /></button>
                       <button onClick={handleSaveEdit} className="p-2 text-green-400 hover:text-green-700" title="Save"><Check size={20} /></button>
                     </div>
