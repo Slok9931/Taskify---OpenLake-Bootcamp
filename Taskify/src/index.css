@@ -12,4 +12,17 @@
     animation: neonShift 18s linear infinite;
   }
   
-  
+  @keyframes gradient-x {
+  0%,
+  100% {
+    background-position: left center;
+  }
+  50% {
+    background-position: right center;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-x 6s ease infinite;
+}

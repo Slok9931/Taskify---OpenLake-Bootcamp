@@ -20,7 +20,6 @@ const Todo = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
 
-  // Add new todo
   const handleAddTodo = (newTodo) => {
     setTodos((prevTodos) => [...prevTodos, newTodo]);
   };
@@ -75,4 +74,6 @@ const Todo = () => {
       </div>
     </div>
   );
-}
+};
+
+export default Todo;
